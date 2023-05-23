@@ -2,21 +2,28 @@ package com.starter.login;
 
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.map.MapUtil;
-import com.starter.common.controller.BaseController;
 import com.starter.common.lang.Result;
 import com.google.code.kaptcha.Producer;
+import com.starter.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 import sun.misc.BASE64Encoder;
 
 import javax.imageio.ImageIO;
+import javax.servlet.http.HttpServletRequest;
 import java.awt.image.BufferedImage;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 
 @RestController
-public class LoginController extends BaseController {
+public class LoginController {
+
+    @Autowired
+    HttpServletRequest req;
+
+    @Autowired
+    RedisUtil redisUtil;
 
     @Autowired
     Producer producer;
