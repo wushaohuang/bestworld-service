@@ -20,14 +20,15 @@ public class RedisConfig {
 		Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
 		jackson2JsonRedisSerializer.setObjectMapper(new ObjectMapper());
 
+		// 使用StringRedisSerializer来序列化和反序列化redis的key值
 		redisTemplate.setKeySerializer(new StringRedisSerializer());
 		redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
 
+		// Hash的key也采用StringRedisSerializer的序列化方式
 		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
 		redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
 
 		return redisTemplate;
 
 	}
-
 }

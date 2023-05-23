@@ -7,8 +7,11 @@ import java.io.Serializable;
 @Data
 public class Result implements Serializable {
 
+	// 状态码
 	private int code;
+	// 提示信息
 	private String msg;
+	// 查询到的结果数据
 	private Object data;
 
 	public static Result succ(Object data) {

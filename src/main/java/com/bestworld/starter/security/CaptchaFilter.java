@@ -28,9 +28,6 @@ public class CaptchaFilter extends OncePerRequestFilter {
 
 		String url = httpServletRequest.getRequestURI();
 
-		System.out.println("url");
-		System.out.println(url);
-
 		if ("/login".equals(url) && httpServletRequest.getMethod().equals("POST")) {
 
 			try{

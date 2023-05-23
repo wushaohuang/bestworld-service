@@ -56,12 +56,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 			"/login",
 			"/logout",
 			"/captcha",
-			"http://localhost:8081/captcha",
-			"/favicon.ico"
+			"/favicon.ico",
+			"/calculation_cash_flow",
+			"/calculation_cash_flow/report1"
 	};
 
 	protected void configure(HttpSecurity http) throws Exception {
-		System.out.println(URL_WHITELIST[0]);
+
 		http.cors().and().csrf().disable()
 
 				// 登录配置
@@ -81,7 +82,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				// 配置拦截规则
 				.and()
 				.authorizeRequests()
-				.antMatchers("/captcha").authenticated()
 				.antMatchers(URL_WHITELIST).permitAll()
 				.anyRequest().authenticated()
 
