@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import reactor.util.annotation.Nullable;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
@@ -28,7 +29,7 @@ public class SysUser implements Serializable {
      * 用户名
      */
     @NotBlank(message = "用户名不能为空")
-    private String username;
+    private String user_name;
     /**
      * 密码
      */
@@ -58,6 +59,7 @@ public class SysUser implements Serializable {
     /**
      * 上次登录时间
      */
+    @Nullable
     private LocalDateTime lastLogin;
     /**
      * 用户类型（0 管理员，1普通用户）
@@ -66,21 +68,21 @@ public class SysUser implements Serializable {
     /**
      * 创建人的用户id
      */
-    private Long createBy;
+    private Long create_by;
     /**
      * 创建时间
      */
-    private Date createTime;
+    private Date create_time;
     /**
      * 更新人
      */
-    private Long updateBy;
+    private Long update_by;
     /**
      * 更新时间
      */
-    private Date updateTime;
+    private Date update_time;
     /**
      * 删除标志（0 代表未删除，1 代表已删除）
      */
-    private Integer delFlag;
+    private Integer del_flag;
 }

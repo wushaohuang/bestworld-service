@@ -31,7 +31,7 @@ public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> impleme
 
         //  ROLE_admin,ROLE_normal,sys:user:list,....
         String authority = "";
-        authority = (String) redisUtil.get("GrantedAuthority:" + sysUser.getUsername());
+        authority = (String) redisUtil.get("GrantedAuthority:" + sysUser.getUser_name());
         return authority;
     }
 
