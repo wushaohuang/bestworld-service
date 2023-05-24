@@ -5,5 +5,5 @@ import java.util.List;
 import java.util.Map;
 
 public interface CashFlowService {
-    Response queryReport1(Map<String, Object> parameterMap);
+    List<?> queryReport1(Map<String, Object> parameterMap);
 }

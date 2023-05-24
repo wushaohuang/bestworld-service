@@ -9,13 +9,15 @@ import com.starter.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.Resource;
+
 @Service
 public class SysUserServiceImpl extends ServiceImpl<SysUserDao, SysUser> implements SysUserService {
-    @Autowired
-    SysUserDao sysUserDao;
+    @Resource
+    private SysUserDao sysUserDao;
 
-    @Autowired
-    RedisUtil redisUtil;
+    @Resource
+    private RedisUtil redisUtil;
 
     @Override
     public SysUser getByUsername(String username) {

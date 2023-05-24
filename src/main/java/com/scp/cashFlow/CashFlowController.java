@@ -17,7 +17,7 @@ public class CashFlowController {
     private CashFlowService cashFlowService;
 
     @GetMapping("/calculation_cash_flow")
-    public Response queryReport1(List<?> request) {
+    public List<?> queryReport1(List<?> request) {
         System.out.println("1111111111111111111");
         return cashFlowService.queryReport1(parameterMap);
     }

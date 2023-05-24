@@ -1,6 +1,6 @@
 package com.starter.config;
 
-import com.starter.login.service.impl.UserDetailServiceImpl;
+import com.starter.login.dao.SysUserDao;
 import com.starter.security.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -34,16 +34,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	@Autowired
 	JwtAccessDeniedHandler jwtAccessDeniedHandler;
 
-	@Autowired
-    UserDetailServiceImpl userDetailService;
 
 	@Autowired
 	JwtLogoutSuccessHandler jwtLogoutSuccessHandler;
 
 	@Bean
 	JwtAuthenticationFilter jwtAuthenticationFilter() throws Exception {
-		JwtAuthenticationFilter jwtAuthenticationFilter = new JwtAuthenticationFilter(authenticationManager());
-		return jwtAuthenticationFilter;
+		return new JwtAuthenticationFilter(authenticationManager());
 	}
 
 	@Bean
@@ -97,12 +94,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.addFilter(jwtAuthenticationFilter())
 				.addFilterBefore(captchaFilter, UsernamePasswordAuthenticationFilter.class)
 		;
-	}
-
-	@Override
-	//userDetailService注入到security中
-	//security会自动实现密码匹配
-	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailService);
 	}
 }

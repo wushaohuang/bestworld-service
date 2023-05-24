@@ -3,7 +3,6 @@ package com.starter.security;
 import cn.hutool.core.util.StrUtil;
 import com.starter.login.bean.SysUser;
 import com.starter.login.service.SysUserService;
-import com.starter.login.service.impl.UserDetailServiceImpl;
 import com.starter.utils.JwtUtils;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.JwtException;
@@ -23,9 +22,6 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
 	@Autowired
 	JwtUtils jwtUtils;
-
-	@Autowired
-	UserDetailServiceImpl userDetailService;
 
 	@Autowired
 	SysUserService sysUserService;
@@ -55,7 +51,7 @@ public class JwtAuthenticationFilter extends BasicAuthenticationFilter {
 
 		SysUser sysUser = sysUserService.getByUsername(username);
 		UsernamePasswordAuthenticationToken token
-				= new UsernamePasswordAuthenticationToken(username, null, userDetailService.getUserAuthority(sysUser.getId()));
+				= new UsernamePasswordAuthenticationToken(username, null, null);
 
 		SecurityContextHolder.getContext().setAuthentication(token);
 
