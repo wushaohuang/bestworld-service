@@ -2,6 +2,7 @@ package com.scp.cashFlow.service.impl;
 
 import com.scp.cashFlow.dao.CashFlowDao;
 import com.scp.cashFlow.service.CashFlowService;
+import com.starter.common.lang.Response;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -13,7 +14,7 @@ public class CashFlowServiceImpl implements CashFlowService {
     @Resource
     private CashFlowDao cashFlowDao;
     @Override
-    public List<?> queryReport1(Map<String, Object> parameterMap) {
+    public Response queryReport1(Map<String, Object> parameterMap) {
         List<Map<String, Object>> dataList = cashFlowDao.queryReport1(parameterMap);
         return null;
     }

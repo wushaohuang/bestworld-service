@@ -2,7 +2,7 @@ package com.starter.login;
 
 import cn.hutool.core.lang.UUID;
 import cn.hutool.core.map.MapUtil;
-import com.starter.common.lang.Result;
+import com.starter.common.lang.Response;
 import com.google.code.kaptcha.Producer;
 import com.starter.utils.RedisUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,7 +29,7 @@ public class LoginController {
     Producer producer;
 
     @GetMapping("/captcha")
-    public Result captcha() throws IOException {
+    public Response captcha() throws IOException {
         System.out.println("/captcha");
         String key = UUID.randomUUID().toString();
         String code = producer.createText();
@@ -39,7 +39,7 @@ public class LoginController {
         BASE64Encoder encoder = new BASE64Encoder();
         String str = "data:image/jpeg;base64,";
         String base64Img = str + encoder.encode(outputStream.toByteArray());
-        return Result.succ(
+        return Response.succ(
                 MapUtil.builder()
                         .put("token", key)
                         .put("captchaImg", base64Img)
