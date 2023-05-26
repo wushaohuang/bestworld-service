@@ -1,9 +1,8 @@
 package com.starter.login.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.starter.login.bean.SysUser;
+import com.starter.login.bean.User;
 import org.apache.ibatis.annotations.Mapper;
-import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -16,13 +15,13 @@ import java.util.List;
  * @since 2021-04-05
  */
 @Mapper
-public interface SysUserDao extends BaseMapper<SysUser> {
+public interface SysUserDao extends BaseMapper<User> {
 
     List<Long> getNavMenuIds(Long userId);
 
-    List<SysUser> listByMenuId(Long menuId);
+    List<User> listByMenuId(Long menuId);
 
-    SysUser getByUsername(String username);
+    User getByUsername(String username);
 
     String getUserAuthorityInfo(Long userId);
 }

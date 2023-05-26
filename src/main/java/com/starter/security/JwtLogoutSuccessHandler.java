@@ -1,7 +1,7 @@
 package com.starter.security;
 
 import cn.hutool.json.JSONUtil;
-import com.starter.common.lang.Response;
+import com.starter.common.lang.ResponseResult;
 import com.starter.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -18,26 +18,26 @@ import java.io.IOException;
 @Component
 public class JwtLogoutSuccessHandler implements LogoutSuccessHandler {
 
-	@Autowired
-	JwtUtils jwtUtils;
+    @Autowired
+    JwtUtils jwtUtils;
 
-	@Override
-	public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
+    @Override
+    public void onLogoutSuccess(HttpServletRequest request, HttpServletResponse response, Authentication authentication) throws IOException, ServletException {
 
-		if (authentication != null) {
-			new SecurityContextLogoutHandler().logout(request, response, authentication);
-		}
+        if (authentication != null) {
+            new SecurityContextLogoutHandler().logout(request, response, authentication);
+        }
 
-		response.setContentType("application/json;charset=UTF-8");
-		ServletOutputStream outputStream = response.getOutputStream();
+        response.setContentType("application/json;charset=UTF-8");
+        ServletOutputStream outputStream = response.getOutputStream();
 
-		response.setHeader(jwtUtils.getHeader(), "");
+        response.setHeader(jwtUtils.getUUID(), "");
 
-		Response result = Response.succ("");
+        ResponseResult result = new ResponseResult(0, "");
 
-		outputStream.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
+        outputStream.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
 
-		outputStream.flush();
-		outputStream.close();
-	}
+        outputStream.flush();
+        outputStream.close();
+    }
 }

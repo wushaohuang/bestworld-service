@@ -1,10 +1,10 @@
 package com.scp.cashFlow.service;
 
-import com.starter.common.lang.Response;
+import com.starter.common.lang.ResponseResult;
 
 import java.util.List;
 import java.util.Map;
 
 public interface CashFlowService {
-    Response queryReport1(Map<String, Object> parameterMap);
+    ResponseResult queryReport1(Map<String, Object> parameterMap);
 }

@@ -1,7 +1,7 @@
 package com.scp.cashFlow;
 
 import com.scp.cashFlow.service.CashFlowService;
-import com.starter.common.lang.Response;
+import com.starter.common.lang.ResponseResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,7 +17,7 @@ public class CashFlowController {
     private CashFlowService cashFlowService;
 
     @GetMapping("/calculation_cash_flow")
-    public Response queryReport1(List<?> request) {
+    public ResponseResult queryReport1(List<?> request) {
         System.out.println("1111111111111111111");
         return cashFlowService.queryReport1(parameterMap);
     }

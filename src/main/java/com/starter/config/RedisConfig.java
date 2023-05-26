@@ -1,34 +1,33 @@
 package com.starter.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import com.starter.utils.FastJsonRedisSerializer;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.redis.connection.RedisConnectionFactory;
 import org.springframework.data.redis.core.RedisTemplate;
-import org.springframework.data.redis.serializer.Jackson2JsonRedisSerializer;
 import org.springframework.data.redis.serializer.StringRedisSerializer;
 
 @Configuration
 public class RedisConfig {
 
 	@Bean
-	RedisTemplate redisTemplate(RedisConnectionFactory redisConnectionFactory) {
+	@SuppressWarnings(value = { "unchecked", "rawtypes" })
+	public RedisTemplate<Object, Object> redisTemplate(RedisConnectionFactory connectionFactory)
+	{
+		RedisTemplate<Object, Object> template = new RedisTemplate<>();
+		template.setConnectionFactory(connectionFactory);
 
-		RedisTemplate redisTemplate = new RedisTemplate();
-		redisTemplate.setConnectionFactory(redisConnectionFactory);
-
-		Jackson2JsonRedisSerializer jackson2JsonRedisSerializer = new Jackson2JsonRedisSerializer(Object.class);
-		jackson2JsonRedisSerializer.setObjectMapper(new ObjectMapper());
+		FastJsonRedisSerializer serializer = new FastJsonRedisSerializer(Object.class);
 
 		// 使用StringRedisSerializer来序列化和反序列化redis的key值
-		redisTemplate.setKeySerializer(new StringRedisSerializer());
-		redisTemplate.setValueSerializer(jackson2JsonRedisSerializer);
+		template.setKeySerializer(new StringRedisSerializer());
+		template.setValueSerializer(serializer);
 
 		// Hash的key也采用StringRedisSerializer的序列化方式
-		redisTemplate.setHashKeySerializer(new StringRedisSerializer());
-		redisTemplate.setHashValueSerializer(jackson2JsonRedisSerializer);
+		template.setHashKeySerializer(new StringRedisSerializer());
+		template.setHashValueSerializer(serializer);
 
-		return redisTemplate;
-
+		template.afterPropertiesSet();
+		return template;
 	}
 }

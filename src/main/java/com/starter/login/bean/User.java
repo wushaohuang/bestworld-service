@@ -1,35 +1,34 @@
 package com.starter.login.bean;
 
-import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import reactor.util.annotation.Nullable;
 
-import javax.validation.constraints.Email;
-import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Date;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@TableName("sys_user")
-public class SysUser implements Serializable {
+@TableName(value = "sys_user")
+public class User implements Serializable {
     private static final long serialVersionUID = -40356785423868312L;
+
     /**
      * 主键
      */
-    @TableId(value = "id", type = IdType.AUTO)
+    @TableId
     private Long id;
     /**
      * 用户名
      */
-    @NotBlank(message = "用户名不能为空")
-    private String user_name;
+    private String userName;
+    /**
+     * 昵称
+     */
+    private String nickName;
     /**
      * 密码
      */
@@ -39,14 +38,8 @@ public class SysUser implements Serializable {
      */
     private String status;
     /**
-     * 头像
-     */
-    private String avatar;
-    /**
      * 邮箱
      */
-    @NotBlank(message = "邮箱不能为空")
-    @Email(message = "邮箱格式不正确")
     private String email;
     /**
      * 手机号
@@ -57,32 +50,31 @@ public class SysUser implements Serializable {
      */
     private String sex;
     /**
-     * 上次登录时间
+     * 头像
      */
-    @Nullable
-    private LocalDateTime lastLogin;
+    private String avatar;
     /**
-     * 用户类型（0 管理员，1普通用户）
+     * 用户类型（0管理员，1普通用户）
      */
     private String userType;
     /**
      * 创建人的用户id
      */
-    private Long create_by;
+    private Long createBy;
     /**
      * 创建时间
      */
-    private Date create_time;
+    private Date createTime;
     /**
      * 更新人
      */
-    private Long update_by;
+    private Long updateBy;
     /**
      * 更新时间
      */
-    private Date update_time;
+    private Date updateTime;
     /**
-     * 删除标志（0 代表未删除，1 代表已删除）
+     * 删除标志（0代表未删除，1代表已删除）
      */
-    private Integer del_flag;
+    private Integer delFlag;
 }
