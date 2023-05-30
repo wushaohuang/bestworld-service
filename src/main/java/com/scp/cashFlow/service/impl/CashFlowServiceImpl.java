@@ -13,8 +13,8 @@ public class CashFlowServiceImpl implements CashFlowService {
     private CashFlowDao cashFlowDao;
 
     @Override
-    public Map<String, Object> queryReport1() {
-        return cashFlowDao.queryReport1();
+    public Map<String, Object> queryReport1(Map<String, Object> parameterMap) {
+        return cashFlowDao.queryReport1(parameterMap);
     }
 }
 

@@ -7,5 +7,5 @@ import java.util.Map;
 
 @Repository
 public interface CashFlowService {
-    Map<String, Object> queryReport1();
+    Map<String, Object> queryReport1(Map<String, Object> parameterMap);
 }

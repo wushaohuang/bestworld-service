@@ -7,5 +7,5 @@ import java.util.List;
 import java.util.Map;
 @Mapper
 public interface CashFlowDao {
-    Map<String, Object> queryReport1();
+    Map<String, Object> queryReport1(Map<String, Object> parameterMap);
 }
