@@ -1,7 +1,7 @@
 package com.starter.security;
 
 import cn.hutool.json.JSONUtil;
-import com.starter.common.lang.ResponseResult;
+import com.starter.common.lang.Result;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.AuthenticationEntryPoint;
 import org.springframework.stereotype.Component;
@@ -22,7 +22,7 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
 		response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
 		ServletOutputStream outputStream = response.getOutputStream();
 
-		ResponseResult result = new ResponseResult(400, "请先登录");
+		Result result = Result.fail("请先登录");
 
 		outputStream.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
 

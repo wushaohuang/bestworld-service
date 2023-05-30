@@ -115,7 +115,6 @@
             <version>1.2.33</version>
         </dependency>
     </dependencies>
-
     <build>
         <plugins>
             <plugin>
@@ -131,5 +130,14 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/main/java</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+                <filtering>false</filtering>
+            </resource>
+        </resources>
     </build>
 </project>

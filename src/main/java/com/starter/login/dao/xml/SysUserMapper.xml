@@ -12,7 +12,7 @@
 
     </select>
 
-    <select id="listByMenuId" resultType="com.starter.login.bean.SysUser">
+    <select id="listByMenuId" resultType="com.starter.login.bean.LoginUser">
         SELECT DISTINCT
             su.*
         FROM

@@ -1,10 +1,11 @@
 package com.scp.cashFlow.service;
 
-import com.starter.common.lang.ResponseResult;
+import org.springframework.stereotype.Repository;
 
-import java.util.List;
 import java.util.Map;
 
+
+@Repository
 public interface CashFlowService {
-    ResponseResult queryReport1(Map<String, Object> parameterMap);
+    Map<String, Object> queryReport1();
 }

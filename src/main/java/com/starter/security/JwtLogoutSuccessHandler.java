@@ -1,7 +1,7 @@
 package com.starter.security;
 
 import cn.hutool.json.JSONUtil;
-import com.starter.common.lang.ResponseResult;
+import com.starter.common.lang.Result;
 import com.starter.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -33,7 +33,7 @@ public class JwtLogoutSuccessHandler implements LogoutSuccessHandler {
 
         response.setHeader(jwtUtils.getUUID(), "");
 
-        ResponseResult result = new ResponseResult(0, "");
+        Result result = Result.succ(0);
 
         outputStream.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
 

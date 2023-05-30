@@ -1,7 +1,7 @@
 package com.starter.security;
 
 import cn.hutool.json.JSONUtil;
-import com.starter.common.lang.ResponseResult;
+import com.starter.common.lang.Result;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
 import org.springframework.stereotype.Component;
@@ -21,7 +21,7 @@ public class LoginFailureHandler implements AuthenticationFailureHandler {
 		response.setContentType("application/json;charset=UTF-8");
 		ServletOutputStream outputStream = response.getOutputStream();
 
-		ResponseResult result = new ResponseResult(404,"用户名或密码错误");
+		Result result = Result.fail("用户名或密码错误");
 
 		outputStream.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
 

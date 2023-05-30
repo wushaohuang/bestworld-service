@@ -1,6 +1,6 @@
 package com.starter.common.exception;
 
-import com.starter.common.lang.ResponseResult;
+import com.starter.common.lang.Result;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.validation.BindingResult;
@@ -19,27 +19,27 @@ public class GlobalExceptionHandler {
 	// 实体校验异常捕获
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(value = MethodArgumentNotValidException.class)
-	public ResponseResult handler(MethodArgumentNotValidException e) {
+	public Result handler(MethodArgumentNotValidException e) {
 
 		BindingResult result = e.getBindingResult();
 		ObjectError objectError = result.getAllErrors().stream().findFirst().get();
 
 		log.error("实体校验异常：----------------{}", objectError.getDefaultMessage());
-		return new ResponseResult(666,objectError.getDefaultMessage());
+		return Result.fail(666, "实体校验异常", objectError.getDefaultMessage());
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(value = IllegalArgumentException.class)
-	public ResponseResult handler(IllegalArgumentException e) {
+	public Result handler(IllegalArgumentException e) {
 		log.error("Assert异常：----------------{}", e.getMessage());
-		return new ResponseResult(666,e.getMessage());
+		return Result.fail(666, "Assert异常", e.getMessage());
 	}
 
 	@ResponseStatus(HttpStatus.BAD_REQUEST)
 	@ExceptionHandler(value = RuntimeException.class)
-	public ResponseResult handler(RuntimeException e) {
+	public Result handler(RuntimeException e) {
 		log.error("运行时异常：----------------{}", e.getMessage());
-		return new ResponseResult(400,e.getMessage());
+		return Result.fail(400,"运行时异常", e.getMessage());
 	}
 
 }

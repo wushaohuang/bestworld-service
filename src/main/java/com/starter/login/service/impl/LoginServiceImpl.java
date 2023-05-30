@@ -2,7 +2,7 @@ package com.starter.login.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.Wrapper;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import com.starter.common.lang.ResponseResult;
+import com.starter.common.lang.Result;
 import com.starter.login.bean.LoginUser;
 import com.starter.login.bean.User;
 import com.starter.login.service.LoginService;
@@ -29,7 +29,7 @@ public class LoginServiceImpl implements LoginService {
     private RedisCache redisCache;
 
     @Override
-    public ResponseResult login(User user) {
+    public Result login(User user) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(user.getUserName(),user.getPassword());
         Authentication authenticate = authenticationManager.authenticate(authenticationToken);
         if(Objects.isNull(authenticate)){
@@ -44,7 +44,7 @@ public class LoginServiceImpl implements LoginService {
         //把token响应给前端
         HashMap<String,String> map = new HashMap<>();
         map.put("token",jwt);
-        return new ResponseResult(200,"登陆成功",map);
+        return Result.succ(200, "登陆成功", map);
     }
 
     @Override

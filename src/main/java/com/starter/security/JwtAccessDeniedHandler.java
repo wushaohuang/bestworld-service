@@ -1,7 +1,7 @@
 package com.starter.security;
 
 import cn.hutool.json.JSONUtil;
-import com.starter.common.lang.ResponseResult;
+import com.starter.common.lang.Result;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 import org.springframework.stereotype.Component;
@@ -23,7 +23,7 @@ public class JwtAccessDeniedHandler implements AccessDeniedHandler {
 
 		ServletOutputStream outputStream = response.getOutputStream();
 
-		ResponseResult result = new ResponseResult(666,accessDeniedException.getMessage());
+		Result result = Result.succ(666,"",accessDeniedException.getMessage());
 
 		outputStream.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
 

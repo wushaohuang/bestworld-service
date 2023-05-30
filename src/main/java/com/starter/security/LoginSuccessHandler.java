@@ -1,7 +1,7 @@
 package com.starter.security;
 
 import cn.hutool.json.JSONUtil;
-import com.starter.common.lang.ResponseResult;
+import com.starter.common.lang.Result;
 import com.starter.utils.JwtUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -30,7 +30,7 @@ public class LoginSuccessHandler implements AuthenticationSuccessHandler {
 //		String jwt = jwtUtils.generateToken(authentication.getName());
 //		response.setHeader(jwtUtils.getHeader(), jwt);
 
-		ResponseResult result = new ResponseResult(200,"");
+		Result result = Result.succ(200);
 
 		outputStream.write(JSONUtil.toJsonStr(result).getBytes("UTF-8"));
 
