@@ -36,7 +36,8 @@ public abstract class ControllerHelper {
      */
     private void loadParameter(HttpServletRequest request) {
         parameterMap = new HashMap<>();
-        if ("application/json;charset=UTF-8".equalsIgnoreCase(request.getHeader("Content-Type"))) {
+
+        if ("application/json".equalsIgnoreCase(request.getHeader("Content-Type"))) {
             String reqStr = null;
             try {
                 if (request.getInputStream().isFinished()) {
@@ -81,6 +82,7 @@ public abstract class ControllerHelper {
             for (String key : keySet) {
                 if (parameters.get(key) != null) {
                     para = parameters.get(key);
+                    System.out.println(StringUtils.removeEnd(key, "[]"));
                     if (para.length == 1) {
                         parameterMap.put(StringUtils.removeEnd(key, "[]"), StringUtils.trim(para[0]));
                     } else {

@@ -26,7 +26,6 @@ public class LoginController {
 
     @GetMapping("/captcha")
     public Result captcha() throws IOException {
-        System.out.println("/captcha");
         String key = UUID.randomUUID().toString();
         String code = producer.createText();
         BufferedImage image = producer.createImage(code);

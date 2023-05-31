@@ -16,7 +16,7 @@ public class WebUtils
         try
         {
             response.setStatus(200);
-            response.setContentType("application/json");
+            response.setContentType("application/json;charset=UTF-8");
             response.setCharacterEncoding("utf-8");
             response.getWriter().print(string);
         }

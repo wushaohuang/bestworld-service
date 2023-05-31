@@ -5,4 +5,39 @@
         select *
         from sys_user
     </select>
+
+    <insert id="saveReport1">
+        insert into cashflow_data (VERSION, FEE_TYPE, FEE_NAME, FEE_PRICE, CREATE_BY$, CREATE_DATE$, UPDATE_BY$, UPDATE_DATE$)
+        values (
+                #{report1MonthVersion, jdbcType=VARCHAR},
+                #{type, jdbcType=VARCHAR},
+                #{name, jdbcType=VARCHAR},
+                #{value, jdbcType=VARCHAR},
+                "admin",
+                current_date,
+                null,
+                null
+               )
+    </insert>
+
+    <select id="queryReport4xAxis" resultType="java.util.HashMap">
+        select distinct CREATE_DATE$
+        from cashflow_data
+        order by CREATE_DATE$
+    </select>
+
+    <select id="queryReport4legend" resultType="java.util.HashMap" parameterType="java.util.Map">
+        select ${report4Type} AS legend
+        from cashflow_data
+        group by ${report4Type}
+        order by ${report4Type}
+    </select>
+
+    <select id="queryReport4" resultType="java.util.HashMap" parameterType="java.util.Map">
+        select CREATE_DATE$   as "CALENDAR_DATE",
+               COUNT(1)       AS "VALUE",
+               IFNULL(${report4Type}, 'Others') AS "NAME"
+        from cashflow_data
+        group by CREATE_DATE$, IFNULL(${report4Type}, 'Others')
+    </select>
 </mapper>
