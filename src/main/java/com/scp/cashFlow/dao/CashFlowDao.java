@@ -11,10 +11,10 @@ public interface CashFlowDao {
 
     void saveReport1(Map<String, Object> parameterMap);
 
-    Map<String, Object> queryReport4(Map<String, Object> parameterMap);
+    List<Map<String, Object>> queryReport4(Map<String, Object> parameterMap);
 
     List<Map<String, String>> queryReport4xAxis();
 
-    List<Map<String, String>> queryReport4legend(Map<String, Object> parameterMap);
+    List<Map<String, Object>> queryReport4legend(Map<String, Object> parameterMap);
 
 }

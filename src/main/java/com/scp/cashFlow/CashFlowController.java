@@ -25,8 +25,8 @@ public class CashFlowController extends ControllerHelper {
     @PostMapping("/save_cash_flow")
     public Result saveReport1(HttpServletRequest request) {
         super.pageLoad(request);
-        boolean result = cashFlowService.saveReport1(parameterMap);
-        return Result.succ(result);
+        cashFlowService.saveReport1(parameterMap);
+        return Result.succ(200);
     }
 
     @PostMapping("/report4")

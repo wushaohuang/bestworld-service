@@ -18,7 +18,7 @@ public class CashFlowServiceImpl implements CashFlowService {
     }
 
     @Override
-    public boolean saveReport1(Map<String, Object> parameterMap) {
+    public void saveReport1(Map<String, Object> parameterMap) {
         int report1LastMonthResidue = (int) parameterMap.get("report1LastMonthResidue");
         parameterMap.put("name", "上月余额");
         parameterMap.put("type", "上月余额");
@@ -41,7 +41,6 @@ public class CashFlowServiceImpl implements CashFlowService {
                 parameterMap.get("report3DynamicValidateForm")).get("domains");
         reportDetails(parameterMap, report2DynamicValidateForm);
         reportDetails(parameterMap, report3DynamicValidateForm);
-        return true;
     }
 
     private void reportDetails(Map<String, Object> parameterMap, List<Map<String, Object>> report3DynamicValidateForm) {
@@ -75,18 +74,32 @@ public class CashFlowServiceImpl implements CashFlowService {
             xAxis.add(map.get("CREATE_DATE$"));
         }
         LinkedHashMap<String, Object> resultMap = new LinkedHashMap<>();
-        resultMap.put("xAxis",xAxis);
-
-        List<Map<String, String>> queryReport4legend = cashFlowDao.queryReport4legend(parameterMap);
+        resultMap.put("xAxis", xAxis);
+        List<Map<String, Object>> queryReport4legend = cashFlowDao.queryReport4legend(parameterMap);
         List<String> legend = new ArrayList<>();
-        for (Map<String, String> map : queryReport4legend) {
-            legend.add(map.get("legend"));
+        for (Map<String, Object> map : queryReport4legend) {
+            legend.add((String) map.get("legend"));
         }
-        resultMap.put("legend",legend);
+        resultMap.put("legend", legend);
 
+        // 获取主要数据
+        List<Map<String, Object>> report4Data = cashFlowDao.queryReport4(parameterMap);
+        List<Map<String, Object>> seriesResult = new ArrayList<>();
+        Map<String, Object> series = new HashMap<>();
+        for (String item : xAxis) {
+            series.put("name", item);
+            ArrayList<String> values = new ArrayList<>();
+            for (Map<String, Object> data : report4Data) {
+                if (data.get("CALENDAR_DATE").toString().equals(item)) {
+                    values.add((String) data.get("VALUE"));
+                }
+            }
+            series.put("data", values);
+            seriesResult.add(series);
+        }
+        resultMap.put("data", seriesResult);
 
-
-        return cashFlowDao.queryReport4(parameterMap);
+        return resultMap;
     }
 }
 
