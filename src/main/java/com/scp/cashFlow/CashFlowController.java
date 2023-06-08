@@ -29,7 +29,7 @@ public class CashFlowController extends ControllerHelper {
         return Result.succ(200);
     }
 
-    @PostMapping("/report4")
+    @PostMapping("/query_report4")
     public Result queryReport4(HttpServletRequest request) {
         super.pageLoad(request);
         Map<String, Object> result = cashFlowService.queryReport4(parameterMap);

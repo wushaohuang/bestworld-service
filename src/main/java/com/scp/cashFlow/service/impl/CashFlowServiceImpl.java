@@ -58,14 +58,6 @@ public class CashFlowServiceImpl implements CashFlowService {
         }
     }
 
-    //    {
-//	legend: [],
-//	xAixs: [],
-//	series: {
-//		name: '',
-//		data: []
-//	}
-//}
     @Override
     public Map<String, Object> queryReport4(Map<String, Object> parameterMap) {
         List<Map<String, String>> queryReport4xAxis = cashFlowDao.queryReport4xAxis();
