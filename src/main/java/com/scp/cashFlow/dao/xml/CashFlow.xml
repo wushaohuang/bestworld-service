@@ -33,11 +33,11 @@
     </select>
 
     <select id="queryReport4" resultType="java.util.HashMap" parameterType="java.util.Map">
-        select CAST(CREATE_DATE$ as char) as "CALENDAR_DATE",
-               cast(COUNT(1) as char)     AS "VALUE",
-               IFNULL(VERSION, 'Others')  AS "NAME"
+        select CAST(CREATE_DATE$ as char)       as "CALENDAR_DATE",
+               cast(COUNT(1) as char)           AS "VALUE",
+               IFNULL(${report4Type}, 'Others') AS "NAME"
         from cashflow_data
-        group by CREATE_DATE$, IFNULL(VERSION, 'Others')
+        group by CREATE_DATE$, IFNULL(${report4Type}, 'Others')
     </select>
 
 </mapper>
