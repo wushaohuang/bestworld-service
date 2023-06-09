@@ -34,7 +34,6 @@ public class CashFlowServiceImpl implements CashFlowService {
         parameterMap.put("type", "分摊费用");
         parameterMap.put("value", report1StaffSalary);
         cashFlowDao.saveReport1(parameterMap);
-        String report1MonthVersion = (String) parameterMap.get("report1MonthVersion");
         List<Map<String, Object>> report2DynamicValidateForm = (List<Map<String, Object>>) ((Map<String, Object>)
                 parameterMap.get("report2DynamicValidateForm")).get("domains");
         List<Map<String, Object>> report3DynamicValidateForm = (List<Map<String, Object>>) ((Map<String, Object>)

@@ -9,7 +9,7 @@
     <insert id="saveReport1">
         insert into cashflow_data (VERSION, FEE_TYPE, FEE_NAME, FEE_PRICE, CREATE_BY$, CREATE_DATE$, UPDATE_BY$,
                                    UPDATE_DATE$)
-        values (#{report1MonthVersion, jdbcType=VARCHAR},
+        values (#{report1Version, jdbcType=VARCHAR},
                 #{type, jdbcType=VARCHAR},
                 #{name, jdbcType=VARCHAR},
                 #{value, jdbcType=VARCHAR},
