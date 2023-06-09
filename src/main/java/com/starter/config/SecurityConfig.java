@@ -31,7 +31,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.antMatchers("/save_cash_flow").anonymous()
 				.antMatchers("/calculation_cash_flow").anonymous()
 				.antMatchers("/user/login").anonymous()
-				.antMatchers("/report4").anonymous()
+				.antMatchers("/query_report4").anonymous()
 				// 除上面外的所有请求全部需要鉴权认证
 				.anyRequest().authenticated();
 	}

@@ -76,21 +76,28 @@ public class CashFlowServiceImpl implements CashFlowService {
 
         // 获取主要数据
         List<Map<String, Object>> report4Data = cashFlowDao.queryReport4(parameterMap);
-        List<Map<String, Object>> seriesResult = new ArrayList<>();
-        Map<String, Object> series = new HashMap<>();
-        for (String item : xAxis) {
-            series.put("name", item);
-            ArrayList<String> values = new ArrayList<>();
-            for (Map<String, Object> data : report4Data) {
-                if (data.get("CALENDAR_DATE").toString().equals(item)) {
-                    values.add((String) data.get("VALUE"));
-                }
-            }
-            series.put("data", values);
-            seriesResult.add(series);
-        }
-        resultMap.put("data", seriesResult);
 
+
+        List<Map<String, Object>> seriesResult = new ArrayList<>();
+        List<Map<String, List<Map<String, Object>>>> output = new ArrayList<>();
+        for (String leg : legend) {
+            Map<String, List<Map<String, Object>>> newOutput = new HashMap<>();
+            for (String item : xAxis) {
+                Map<String, Object> series = new HashMap<>();
+                series.put("name", item);
+                ArrayList<String> values = new ArrayList<>();
+                for (Map<String, Object> data : report4Data) {
+                    if (data.get("CALENDAR_DATE").toString().equals(item)) {
+                        values.add((String) data.get("VALUE"));
+                    }
+                }
+                series.put("data", values);
+                seriesResult.add(series);
+            }
+            newOutput.put(leg, seriesResult);
+            output.add(newOutput);
+        }
+        resultMap.put("data", output);
         return resultMap;
     }
 }
